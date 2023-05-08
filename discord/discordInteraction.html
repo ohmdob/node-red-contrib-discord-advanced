@@ -55,7 +55,7 @@
         if ($("#node-input-interactionType").val() == "command" || $("#node-input-interactionType").val() == "button" || $("#node-input-interactionType").val() == "messageContextMenu") {
           $("#node-input-custom_id-lbl").text("Command names");
           $("#node-row-commandResponse").prop("style", "");
-          if ($("#node-input-interactionType").val() == "command")
+          if ($("#node-input-interactionType").val() == "command" || $("#node-input-interactionType").val() == "button")
             $("#node-row-ephemeral").prop("style", "");
           else
             $("#node-row-ephemeral").prop("style", "display:none;");
