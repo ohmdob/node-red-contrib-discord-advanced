@@ -53,7 +53,7 @@ module.exports = function (RED) {
             if (custom_id && custom_id.split(",").indexOf(interaction.commandName) < 0) return;
             await interaction.reply({ content: commandResponse, ephemeral: ephemeral });
           }
-          if (interaction.isButton() && ephemeral && interaction.commandName.includes("giftcode")) {
+          if (interaction.isButton() && ephemeral && interaction.commandName.includes("giftcode") ) {
             message.payload.interaction = interaction;
           }
           else {
