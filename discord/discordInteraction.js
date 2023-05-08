@@ -53,6 +53,10 @@ module.exports = function (RED) {
             if (custom_id && custom_id.split(",").indexOf(interaction.commandName) < 0) return;
             await interaction.reply({ content: commandResponse, ephemeral: ephemeral });
           }
+          if (interaction.isButton() && ephemeral) {
+            if (custom_id && custom_id.split(",").indexOf(interaction.commandName) < 0) return;
+            await interaction.reply({ content: commandResponse+" reply", ephemeral: true });
+          }
           else {
             if (custom_id && custom_id.split(",").indexOf(interaction.customId) < 0) return;
             await interaction.deferUpdate();
