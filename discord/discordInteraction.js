@@ -48,21 +48,20 @@ module.exports = function (RED) {
       registerCallback("interactionCreate", async interaction => {
         try {
           if (!matchInteractionType(interaction)) return;
-
+          let message = {};
           if (interaction.isCommand() || interaction.isMessageContextMenuCommand()) {
             if (custom_id && custom_id.split(",").indexOf(interaction.commandName) < 0) return;
             await interaction.reply({ content: commandResponse, ephemeral: ephemeral });
           }
-          if (interaction.isButton() && ephemeral) {
-            if (custom_id && custom_id.split(",").indexOf(interaction.commandName) < 0) return;
-            await interaction.reply({ content: commandResponse+" reply", ephemeral: true });
+          if (interaction.isButton() && ephemeral && interaction.commandName.includes("giftcode")) {
+            message.payload.interaction = interaction;
           }
           else {
             if (custom_id && custom_id.split(",").indexOf(interaction.customId) < 0) return;
             await interaction.deferUpdate();
           }
 
-          let message = {};
+    
           message.payload = Flatted.parse(Flatted.stringify(interaction));
           message.payload.user = Flatted.parse(Flatted.stringify(interaction.user));
 
